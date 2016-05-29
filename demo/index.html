@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>bloombox-pricelist demo</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../bloombox-pricelist.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  
+  <style is="custom-style" include="demo-pages-shared-styles">
+    demo-snippet {
+      min-width: 600px;
+    }
+
+    .vertical-section-container.centered {
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body unresolved>
+  <div class="vertical-section-container centered">
+    <h3>Unit price example</h3>
+    <demo-snippet class="centered-demo">
+      <template>
+        <bloombox-price price="5.0"></bloombox-price>
+      </template>
+    </demo-snippet>
+  </div>
+
+  <div class="vertical-section-container centered">
+    <h3>Flower price list example</h3>
+    <demo-snippet class="centered-demo">
+      <template>
+        <bloombox-pricelist
+          manifest='[{"label":"1g","available":true,"price":18},{"label":"3.5g","available":false,"price":55},{"label":"7g","available":false,"price":105},{"label":"14g","available":false,"price":195},{"label":"28g","available":true,"price":360}]'>
+        </bloombox-pricelist>
+      </template>
+    </demo-snippet>
+  </div>
+</body>
+</html>

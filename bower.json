@@ -1,0 +1,39 @@
+{
+  "name": "bloombox-pricelist",
+  "version": "0.0.1",
+  "description": "Provides UI to display product prices, sometimes at standard weight values",
+  "private": true,
+  "authors": [
+    "Sam Gammon <sam@momentum.io>"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "bloombox"
+  ],
+  "main": [
+    "bloombox-pricelist.html"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bloombox/bloombox-pricelist.git"
+  },
+  "license": "Private, All Rights Reserved",
+  "homepage": "https://github.com/bloombox/bloombox-pricelist",
+  "ignore": [],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "paper-input": "PolymerElements/paper-input#^1.1.11",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^1.2.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "polymerelements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+    "iron-flex-layout": "polymerelements/iron-flex-layout#^1.0.0",
+    "bloombox-styles": "Bloombox/bloombox-styles#^0.0.1",
+    "test-fixture": "polymerelements/test-fixture#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}

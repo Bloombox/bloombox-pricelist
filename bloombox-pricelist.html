@@ -1,0 +1,76 @@
+
+<!--
+`<bloombox-pricelist>` provides UI for unit pricing and weighted pricing. This component wraps `<bloombox-price>` to provide a list of prices.
+
+@group Bloombox Elements
+@element bloombox-pricelist
+@demo demo/index.html
+@homepage bloombox.github.io
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="./bloombox-price.html">
+
+<dom-module id="bloombox-pricelist">
+  <template>
+    <style is="custom-style" include="bloombox-styles">
+      :host {
+
+      }
+    </style>
+
+    <div id="pricelistContainer">
+      <template is="dom-repeat" items="{{manifest}}">
+        <bloombox-price class="price-box" label="{{item.label}}" price="{{item.price}}" available="{{item.available}}" currency="{{currency}}" editable="{{editable}}"></bloombox-price>
+      </template>
+    </div>
+  </template>
+
+  <script>
+    (function () {
+      Polymer.BloomboxPricelist = Polymer({
+        is: 'bloombox-pricelist',
+        properties: {
+          manifest: {
+            type: Array,
+            value: true,
+            notify: true,
+            reflectToAttribute: true
+          },
+
+          currency: {
+            type: String,
+            notify: true,
+            reflectToAttribute: true
+          },
+
+          editable: {
+            type: Boolean,
+            value: false,
+            notify: true,
+            reflectToAttribute: true
+          }
+        },
+
+        readManifest: function(strain) {
+          var prices = this.$$("#pricelistContainer").children,
+          data = {},
+          pi, pp;
+
+          for (pi in prices) {
+            pp = prices[pi];
+
+            if (pp.label !== undefined) {
+              data[pp.label] = {
+                available: pp.available,
+                price: pp.price,
+                label: pp.label
+              };
+            }
+          }
+          return data;
+        }
+      });
+    })();
+  </script>
+</dom-module>

@@ -1,0 +1,129 @@
+
+<!--
+`<bloombox-price>` provides UI for a single price value and label.
+
+@group Bloombox Elements
+@element bloombox-price
+@demo demo/index.html
+@homepage bloombox.github.io
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+
+<dom-module id="bloombox-price">
+  <template>
+    <style is="custom-style" include="bloombox-styles">
+      :host {
+        display: inline-block;
+        margin: 8px;
+        text-align: center;
+        color: #444;
+        background: #DDD;
+      }
+
+      :host.unavailable {
+        background: rgba(221, 221, 221, 0.75);
+      }
+
+      :host .price-wrap {
+        height: 100%;
+        width: 100%;
+        min-width: 60px;
+        min-height: 70px;
+      }
+
+      :host .price-content {
+        font-size: 16pt;
+        padding: 5px;
+        min-height: 35px;
+        line-height: 35px;
+      }
+
+      :host .price-label {
+        background: #444;
+        color: #DDD;
+        height: 25px;
+        line-height: 25px;
+        font-size: 80%;
+        text-transform: uppercase;
+      }
+    </style>
+
+    <div class="price-wrap">
+      <!-- pricebox content -->
+      <div class="price-content">
+        <template is="dom-if" if="{{editable}}">
+          <span class="price-currency">{{currency}}</span>
+          <paper-input id="priceField" placeholder="0.00" value="{{price}}" required no-label-float name="price" class="form-item strain-price-input"></paper-input>
+        </template>
+        <template is="dom-if" if="{{!editable}}">
+          <span class="price-value">{{currency}}{{price}}</span>
+        </template>
+      </div>
+
+      <!-- availability -->
+      <template is="dom-if" if="{{editable}}">
+        <div class="variant-available">
+          <paper-checkbox id="stateToggle" checked="{{available}}" class="price-item item-available"></paper-checkbox>
+          <span class="available-label">Available</span>
+        </div>
+      </template>
+      <!-- end availability -->
+      <!-- end content -->
+
+      <!-- pricebox label -->
+      <template is="dom-if" if="{{label}}">
+        <div class="price-label">
+          <span class="price-label-value">{{label}}</span>
+        </div>
+      </template>
+      <!-- end label -->
+    </div>
+  </template>
+
+  <script>
+    (function () {
+      Polymer.BloomboxPrice = Polymer({
+        is: 'bloombox-price',
+        properties: {
+          label: {
+            type: String,
+            notify: true,
+            value: 'each',
+            reflectToAttribute: true
+          },
+
+          price: {
+            type: String,
+            notify: true,
+            reflectToAttribute: true
+          },
+
+          available: {
+            type: Boolean,
+            value: true,
+            notify: true,
+            reflectToAttribute: true
+          },
+
+          currency: {
+            type: String,
+            notify: true,
+            reflectToAttribute: true,
+            value: '$'
+          },
+
+          editable: {
+            type: Boolean,
+            value: false,
+            notify: true,
+            reflectToAttribute: true
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>
