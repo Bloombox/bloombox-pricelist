@@ -13,6 +13,8 @@
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-checkbox/paper-checkbox.html">
 
+<link rel="import" href="../bloombox-styles/bloombox-styles.html">
+
 <dom-module id="bloombox-price">
   <template>
     <style is="custom-style" include="bloombox-styles">
@@ -42,6 +44,11 @@
         line-height: 35px;
       }
 
+      :host paper-input {
+        display: inline-block;
+        max-width: 100px;
+      }
+
       :host .price-label {
         background: #444;
         color: #DDD;
@@ -50,6 +57,10 @@
         font-size: 80%;
         text-transform: uppercase;
       }
+
+      :host .variant-available {
+        padding: 10px;
+      }
     </style>
 
     <div class="price-wrap">
@@ -57,17 +68,17 @@
       <div class="price-content">
         <template is="dom-if" if="{{editable}}">
           <span class="price-currency">{{currency}}</span>
-          <paper-input id="priceField" placeholder="0.00" value="{{price}}" required no-label-float name="price" class="form-item strain-price-input"></paper-input>
+          <paper-input class="priceField" placeholder="0.00" value="{{price}}" required no-label-float name="price" class="form-item strain-price-input"></paper-input>
         </template>
         <template is="dom-if" if="{{!editable}}">
-          <span class="price-value">{{currency}}{{price}}</span>
+          <span class="price-value">{{currency}}{{_formatPrice(price)}}</span>
         </template>
       </div>
 
       <!-- availability -->
       <template is="dom-if" if="{{editable}}">
         <div class="variant-available">
-          <paper-checkbox id="stateToggle" checked="{{available}}" class="price-item item-available"></paper-checkbox>
+          <paper-checkbox noink class="stateToggle" checked="{{available}}" class="price-item item-available"></paper-checkbox>
           <span class="available-label">Available</span>
         </div>
       </template>
@@ -122,6 +133,10 @@
             notify: true,
             reflectToAttribute: true
           }
+        },
+
+        _formatPrice: function(price) {
+          return ("" + price).endsWith(".0") ? ("" + price).replace(".0", "") : "" + price;
         }
       });
     })();
