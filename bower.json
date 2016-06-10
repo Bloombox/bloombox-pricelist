@@ -22,7 +22,7 @@
   "homepage": "https://github.com/bloombox/bloombox-pricelist",
   "ignore": [],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
+    "polymer": "Polymer/polymer#^1.5.0",
     "paper-input": "PolymerElements/paper-input#^1.1.11",
     "paper-checkbox": "PolymerElements/paper-checkbox#^1.2.0"
   },
