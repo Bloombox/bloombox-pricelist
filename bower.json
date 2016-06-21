@@ -1,6 +1,6 @@
 {
   "name": "bloombox-pricelist",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Provides UI to display product prices, sometimes at standard weight values",
   "private": true,
   "authors": [
