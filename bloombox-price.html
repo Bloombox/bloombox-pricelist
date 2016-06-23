@@ -9,11 +9,10 @@
 -->
 
 <link rel="import" href="../polymer/polymer.html">
-
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-checkbox/paper-checkbox.html">
-
 <link rel="import" href="../bloombox-styles/bloombox-styles.html">
+
 
 <dom-module id="bloombox-price">
   <template>
@@ -103,49 +102,69 @@
   </template>
 
   <script>
-    (function () {
-      Polymer.BloomboxPrice = Polymer({
-        is: 'bloombox-price',
-        properties: {
-          label: {
-            type: String,
-            notify: true,
-            value: 'each',
-            reflectToAttribute: true
-          },
-
-          price: {
-            type: String,
-            notify: true,
-            reflectToAttribute: true
-          },
-
-          available: {
-            type: Boolean,
-            value: true,
-            notify: true,
-            reflectToAttribute: true
-          },
-
-          currency: {
-            type: String,
-            notify: true,
-            reflectToAttribute: true,
-            value: '$'
-          },
-
-          editable: {
-            type: Boolean,
-            value: false,
-            notify: true,
-            reflectToAttribute: true
-          }
+    Polymer.BloomboxPrice = Polymer({
+      is: 'bloombox-price',
+      properties: {
+        /**
+         * Label to put underneath this price box. Usually either `"each"` (for unit
+         * based pricing) or a named weight, such as `"gram"` or `"ounce"`.
+         */
+        label: {
+          type: String,
+          notify: true,
+          value: 'each',
+          reflectToAttribute: true
         },
 
-        _formatPrice: function(price) {
-          return ("" + price).endsWith(".0") ? ("" + price).replace(".0", "") : "" + price;
+        /**
+         * Price value of this item (and at this weight, if specified).
+         */
+        price: {
+          type: String,
+          notify: true,
+          reflectToAttribute: true
+        },
+
+        /**
+         * Boolean flag indicating whether this item/price combination is currently
+         * available, or is not available and is currently out-of-stock.
+         */
+        available: {
+          type: Boolean,
+          value: true,
+          notify: true,
+          reflectToAttribute: true
+        },
+
+        /**
+         * Currency symbol to show in front of the price.
+         */
+        currency: {
+          type: String,
+          notify: true,
+          reflectToAttribute: true,
+          value: '$'
+        },
+
+        /**
+         * Boolean flag indicating whether we should be editing this price, and
+         * showing an input box accordingly.
+         */
+        editable: {
+          type: Boolean,
+          value: false,
+          notify: true,
+          reflectToAttribute: true
         }
-      });
-    })();
+      },
+
+      /**
+       * Format a price value with the proper number of trailing zeros, or remove
+       * the trailing zeros altogether if they balance out to `.0`.
+       */
+      _formatPrice: function(price) {
+        return ("" + price).endsWith(".0") ? ("" + price).replace(".0", "") : "" + price;
+      }
+    });
   </script>
 </dom-module>
