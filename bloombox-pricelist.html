@@ -27,49 +27,66 @@
   </template>
 
   <script>
-    (function () {
-      Polymer.BloomboxPricelist = Polymer({
-        is: 'bloombox-pricelist',
-        properties: {
-          manifest: {
-            type: Array,
-            notify: true,
-            reflectToAttribute: true
-          },
-
-          currency: {
-            type: String,
-            notify: true,
-            reflectToAttribute: true
-          },
-
-          editable: {
-            type: Boolean,
-            value: false,
-            notify: true,
-            reflectToAttribute: true
-          }
+    Polymer.BloomboxPricelist = Polymer({
+      is: 'bloombox-pricelist',
+      properties: {
+        /**
+         * Two-way binding property for a pricing manifest, composed of pricing entries,
+         * each of which is an `Object` with properties `label`, `available` and `price`:
+         * - `label`: Usually "Unit" (for unit-based pricing) or a weight, like "Gram"
+         * - `available`: `Boolean` flag indicating whether the item/price is available
+         * - `price`: `Number` unit that indicates the price of this item
+         */
+        manifest: {
+          type: Array,
+          notify: true,
+          reflectToAttribute: true
         },
 
-        readManifest: function(strain) {
-          var prices = this.$$("#pricelistContainer").children,
-          data = {},
-          pi, pp;
+        /**
+         * Currency symbol to show in front of prices.
+         */
+        currency: {
+          type: String,
+          notify: true,
+          reflectToAttribute: true,
+          default: "$"
+        },
 
-          for (pi in prices) {
-            pp = prices[pi];
-
-            if (pp.label !== undefined) {
-              data[pp.label] = {
-                available: pp.available,
-                price: pp.price,
-                label: pp.label
-              };
-            }
-          }
-          return data;
+        /**
+         * Flag that indicates we should be in a mode to edit the entries in `manifest`,
+         * and should show an individual price entry with an input box for each item.
+         */
+        editable: {
+          type: Boolean,
+          value: false,
+          notify: true,
+          reflectToAttribute: true
         }
-      });
-    })();
+      },
+
+      /**
+       * Read the current state of `bloombox-price` objects and produce a pricing
+       * manifest from scratch.
+       */
+      readManifest: function(strain) {
+        var prices = this.$$("#pricelistContainer").children,
+        data = {},
+        pi, pp;
+
+        for (pi in prices) {
+          pp = prices[pi];
+
+          if (pp.label !== undefined) {
+            data[pp.label] = {
+              available: pp.available,
+              price: pp.price,
+              label: pp.label
+            };
+          }
+        }
+        return data;
+      }
+    });
   </script>
 </dom-module>
