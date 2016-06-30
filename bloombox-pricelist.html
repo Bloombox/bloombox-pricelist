@@ -71,14 +71,20 @@
        */
       readManifest: function() {
         var prices = this.$$("#pricelistContainer").children,
+        labels = {"0.5g": "halfgram", ".5g": "halfgram", "1g": "gram", "3.5g": "eighth", "7g": "quarter", "14g": "half", "28g": "ounce"};
         data = {},
-        pi, pp;
+        pi, pp, pl;
 
         for (pi in prices) {
           pp = prices[pi];
 
           if (pp.label !== undefined) {
-            data[pp.label] = {
+            if (labels[pp.label] !== undefined) {
+              pl = labels[pp.label];
+            } else {
+              pl = pp.label;
+            }
+            data[pl] = {
               available: pp.available,
               price: pp.price,
               label: pp.label
