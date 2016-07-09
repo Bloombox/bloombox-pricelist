@@ -23,6 +23,7 @@
         text-align: center;
         color: #444;
         background: #DDD;
+        cursor: default;
       }
 
       :host.unavailable {
@@ -33,13 +34,12 @@
         height: 100%;
         width: 100%;
         min-width: 65px;
-        min-height: 75px;
         position: relative;
       }
 
       :host .price-content {
         font-size: 16pt;
-        padding: 5px;
+        padding-top: 5px;
         min-height: 35px;
         line-height: 35px;
       }
@@ -54,17 +54,18 @@
         color: #DDD;
         height: 25px;
         line-height: 25px;
-        font-size: 80%;
+        font-size: 8pt;
+        padding: 0 5px;
         text-transform: uppercase;
-        position: absolute;
-        bottom: 0;
+        position: relative;
+        bottom: -5px;
         left: 0;
         right: 0;
       }
 
       :host .variant-available {
         padding: 10px;
-        padding-bottom: 30px;
+        padding-bottom: 5px;
         position: relative;
         top: -5px;
         display: flex;
