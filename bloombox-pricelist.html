@@ -12,15 +12,20 @@
 <link rel="import" href="bloombox-price.html">
 
 <dom-module id="bloombox-pricelist">
-  <template>
+  <template strip-whitespace>
     <style is="custom-style" include="bloombox-styles">
       :host {
+        display: flex;
+      }
 
+      :host bloombox-price {
+        margin-right: 12px;
+        margin-bottom: 10px;
       }
     </style>
 
     <div id="pricelistContainer">
-      <template is="dom-repeat" items="{{manifest}}">
+      <template is="dom-repeat" items="{{manifest}}" strip-whitespace>
         <bloombox-price class="price-box" label="{{item.label}}" price="{{item.price}}" available="{{item.available}}" currency="{{currency}}" editable="{{editable}}"></bloombox-price>
       </template>
     </div>
