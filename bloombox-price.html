@@ -15,11 +15,11 @@
 
 
 <dom-module id="bloombox-price">
-  <template>
+  <template strip-whitespace>
     <style is="custom-style" include="bloombox-styles">
       :host {
-        display: inline-block;
-        margin-right: 8px;
+        display: inline-flex;
+        flex-direction: column;
         text-align: center;
         color: #444;
         background: #DDD;
@@ -45,7 +45,7 @@
       :host .zerostate.price-content {
         font-size: 14pt;
         padding: 5px;
-        width: 85px;
+        width: 75px;
         min-height: 35px;
       }
 
@@ -57,22 +57,17 @@
       :host .price-label {
         background: #444;
         color: #DDD;
-        height: 25px;
-        line-height: 20px;
+        height: 21px;
+        line-height: 22px;
         font-size: 8pt;
-        padding: 0 5px;
         text-transform: uppercase;
         position: relative;
-        bottom: -5px;
         left: 0;
         right: 0;
       }
 
       :host .variant-available {
-        padding: 10px;
-        padding-bottom: 5px;
-        position: relative;
-        top: -5px;
+        margin-bottom: 8px;
       }
 
       :host .available-label {
@@ -88,39 +83,28 @@
     </style>
 
     <div class="price-wrap">
-      <!-- pricebox content -->
-      <template is="dom-if" if="{{editable}}">
+      <template is="dom-if" if="{{editable}}" strip-whitespace>
         <div class="price-content zerostate">
           <paper-input class="priceField" placeholder="0.00" value="{{price}}" required no-label-float name="price" class="form-item strain-price-input">
             <span prefix class="price-currency">{{currency}}</span>
           </paper-input>
         </div><!-- end div.price-content.zerostate -->
+        <div class="variant-available">
+          <paper-checkbox noink class="stateToggle" checked="{{available}}" class="price-item item-available"></paper-checkbox>
+          <span class="available-label">In-Stock</span>
+        </div><!-- end div.variant-available -->
       </template>
-      <template is="dom-if" if="{{!editable}}">
+      <template is="dom-if" if="{{!editable}}" strip-whitespace>
         <div class="price-content sealed">
           <span class="price-value">{{currency}}{{_formatPrice(price)}}</span>
         </div><!-- end div.price-content.sealed -->
       </template>
-      </div>
-
-      <!-- availability -->
-      <template is="dom-if" if="{{editable}}">
-        <div class="variant-available">
-          <paper-checkbox noink class="stateToggle" checked="{{available}}" class="price-item item-available"></paper-checkbox>
-          <span class="available-label">In-Stock</span>
-        </div>
-      </template>
-      <!-- end availability -->
-      <!-- end content -->
 
       <!-- pricebox label -->
-      <template is="dom-if" if="{{label}}">
-        <div class="price-label">
-          <span class="price-label-value">{{label}}</span>
-        </div>
-      </template>
-      <!-- end label -->
-    </div>
+      <div class="price-label">
+        <span class="price-label-value">{{label}}</span>
+      </div><!-- end div.price-label -->
+    </div><!-- end div.price-wrap -->
   </template>
 
   <script>
