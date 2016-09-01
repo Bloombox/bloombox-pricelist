@@ -74,7 +74,7 @@
        * Read the current state of `bloombox-price` objects and produce a pricing
        * manifest from scratch.
        */
-      readManifest: function() {
+      readManifest: function(newformat) {
         var prices = this.$$("#pricelistContainer").children,
         labels = {"0.5g": "halfgram", ".5g": "halfgram", "1g": "gram", "3.5g": "eighth", "7g": "quarter", "14g": "half", "28g": "ounce"},
         data = {},
@@ -89,10 +89,18 @@
             } else {
               pl = pp.label;
             }
-            data[pl] = {
-              available: pp.available,
-              price: pp.price
-            };
+            // @TODO(sgammon): i am aware how gross this is
+            if (newformat === true) {
+              data[pl] = {
+                available: pp.available,
+                value: pp.price
+              };
+            } else {
+              data[pl] = {
+                available: pp.available,
+                price: pp.price
+              };
+            }
           }
         }
         return data;
