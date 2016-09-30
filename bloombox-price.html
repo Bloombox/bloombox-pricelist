@@ -112,6 +112,16 @@
       is: 'bloombox-price',
       properties: {
         /**
+         * Always-numeric price value for this item/pricepoint.
+         */
+        _priceValue: {
+          type: Number,
+          notify: true,
+          readOnly: true,
+          computed: "_computeItemPriceValue(price)"
+        },
+
+        /**
          * Label to put underneath this price box. Usually either `"each"` (for unit
          * based pricing) or a named weight, such as `"gram"` or `"ounce"`.
          */
@@ -119,15 +129,6 @@
           type: String,
           notify: true,
           value: 'each',
-          reflectToAttribute: true
-        },
-
-        /**
-         * Price value of this item (and at this weight, if specified).
-         */
-        price: {
-          type: Number,
-          notify: true,
           reflectToAttribute: true
         },
 
@@ -153,6 +154,15 @@
         },
 
         /**
+         * Numeric price value of this item.
+         */
+        price: {
+          type: Number,
+          notify: true,
+          reflectToAttribute: true
+        },
+
+        /**
          * Boolean flag indicating whether we should be editing this price, and
          * showing an input box accordingly.
          */
@@ -162,6 +172,15 @@
           notify: true,
           reflectToAttribute: true
         }
+      },
+
+      /**
+       * Compute an always-numeric item price.
+       */
+      _computeItemPriceValue: function(priceValue) {
+        if (typeof priceValue === "number")
+          return priceValue;
+        return new Number(priceValue);
       },
 
       /**
