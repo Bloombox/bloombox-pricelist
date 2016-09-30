@@ -85,7 +85,7 @@
     <div class="price-wrap">
       <template is="dom-if" if="{{editable}}" strip-whitespace>
         <div class="price-content zerostate">
-          <paper-input class="priceField" placeholder="0.00" value="{{price}}" required no-label-float name="price" class="form-item strain-price-input">
+          <paper-input class="priceField" placeholder="0.00" value="{{_priceValue}}" required no-label-float name="price" class="form-item strain-price-input">
             <span prefix class="price-currency">{{currency}}</span>
           </paper-input>
         </div><!-- end div.price-content.zerostate -->
@@ -96,7 +96,7 @@
       </template>
       <template is="dom-if" if="{{!editable}}" strip-whitespace>
         <div class="price-content sealed">
-          <span class="price-value">{{currency}}{{_formatPrice(price)}}</span>
+          <span class="price-value">{{currency}}{{_formatPrice(_priceValue)}}</span>
         </div><!-- end div.price-content.sealed -->
       </template>
 
@@ -125,7 +125,7 @@
         /**
          * Price value of this item (and at this weight, if specified).
          */
-        price: {
+        _priceValue: {
           type: Number,
           notify: true,
           reflectToAttribute: true
@@ -153,6 +153,16 @@
         },
 
         /**
+         * Numeric price value of this item.
+         */
+        price: {
+          type: Number,
+          notify: true,
+          reflectToAttribute: true,
+          computed: "_computeItemPrice(_priceValue)"
+        },
+
+        /**
          * Boolean flag indicating whether we should be editing this price, and
          * showing an input box accordingly.
          */
@@ -162,6 +172,15 @@
           notify: true,
           reflectToAttribute: true
         }
+      },
+
+      /**
+       * Compute an always-numeric item price.
+       */
+      _computeItemPrice: function(priceValue) {
+        if (typeof priceValue === "number")
+          return priceValue;
+        return new Number(priceValue);
       },
 
       /**
