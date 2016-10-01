@@ -89,7 +89,17 @@
     <div class="price-wrap">
       <div class="zerostate-price" hidden$="[[!editable]]">
         <div class="price-content zerostate">
-          <paper-input class="priceField" placeholder="[[price]]" on-change="_priceDidChange" required no-label-float name="price" class="form-item strain-price-input" error-message="!!">
+          <paper-input
+            id="priceValue"
+            class="priceField"
+            placeholder="[[price]]"
+            value="{{editedPriceValue}}"
+            required
+            no-label-float
+            name="price"
+            class="form-item strain-price-input"
+            error-message="!!"
+            auto-validate>
             <span prefix class="price-currency">{{currency}}</span>
           </paper-input>
         </div><!-- end div.price-content.zerostate -->
@@ -115,13 +125,22 @@
       is: 'bloombox-price',
       properties: {
         /**
+         * Presents a new price after a user edits it in
+         * `editable` mode.
+         */
+        editedPriceValue: {
+          type: String,
+          notify: true,
+          reflectToAttribute: true
+        },
+
+        /**
          * Always-numeric price value for this item/pricepoint.
          */
         _priceValue: {
           type: Number,
           notify: true,
-          readOnly: true,
-          computed: "_computeItemPriceValue(price)"
+          computed: "_computePriceValue(price, editedPriceValue)"
         },
 
         /**
@@ -178,23 +197,12 @@
       },
 
       /**
-       * Compute an always-numeric item price.
+       * Compute the `_priceValue` during `editable` mode.
        */
-      _computeItemPriceValue: function(priceValue) {
-        if (typeof priceValue === "number")
-          return priceValue;
-        return new Number(priceValue);
-      },
-
-      /**
-       * Observer on object `price`.
-       */
-      _priceDidChange: function(newPrice, oldPrice) {
-        if (newPrice !== oldPrice) {
-          if (typeof newPrice === "number" && newPrice > 0.0) {
-            this.price = new Number(newPrice.target.value);
-          }
-        }
+      _computePriceValue: function(price, editedPrice) {
+        if (editedPrice)
+          return parseFloat(editedPrice);
+        return price;
       },
 
       /**

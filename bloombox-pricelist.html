@@ -93,12 +93,12 @@
             if (newformat === true) {
               data[pl] = {
                 available: pp.available,
-                value: pp._priceValue
+                value: (pp._priceValue || pp.price)
               };
             } else {
               data[pl] = {
                 available: pp.available,
-                price: pp._priceValue
+                price: (pp._priceValue || pp.price)
               };
             }
           }
