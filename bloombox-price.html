@@ -85,7 +85,7 @@
     <div class="price-wrap">
       <template is="dom-if" if="{{editable}}" strip-whitespace>
         <div class="price-content zerostate">
-          <paper-input class="priceField" placeholder="0.00" value="{{price}}" required no-label-float name="price" class="form-item strain-price-input">
+          <paper-input class="priceField" placeholder="[[price]]" on-change="_priceDidChange" required no-label-float name="price" class="form-item strain-price-input" error-message="!!">
             <span prefix class="price-currency">{{currency}}</span>
           </paper-input>
         </div><!-- end div.price-content.zerostate -->
@@ -181,6 +181,17 @@
         if (typeof priceValue === "number")
           return priceValue;
         return new Number(priceValue);
+      },
+
+      /**
+       * Observer on object `price`.
+       */
+      _priceDidChange: function(newPrice, oldPrice) {
+        if (newPrice !== oldPrice) {
+          if (typeof newPrice === "number" && newPrice > 0.0) {
+            this.price = new Number(newPrice.target.value);
+          }
+        }
       },
 
       /**
