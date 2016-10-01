@@ -35,6 +35,10 @@
         position: relative;
       }
 
+      :host div[hidden] {
+        display: none;
+      }
+
       :host .sealed.price-content {
         font-size: 16pt;
         width: 65px;
@@ -83,7 +87,7 @@
     </style>
 
     <div class="price-wrap">
-      <template is="dom-if" if="{{editable}}" strip-whitespace>
+      <div class="zerostate-price" hidden$="[[!editable]]">
         <div class="price-content zerostate">
           <paper-input class="priceField" placeholder="[[price]]" on-change="_priceDidChange" required no-label-float name="price" class="form-item strain-price-input" error-message="!!">
             <span prefix class="price-currency">{{currency}}</span>
@@ -93,12 +97,11 @@
           <paper-checkbox noink class="stateToggle" checked="{{available}}" class="price-item item-available"></paper-checkbox>
           <span class="available-label">In-Stock</span>
         </div><!-- end div.variant-available -->
-      </template>
-      <template is="dom-if" if="{{!editable}}" strip-whitespace>
-        <div class="price-content sealed">
-          <span class="price-value">{{currency}}{{_formatPrice(price)}}</span>
-        </div><!-- end div.price-content.sealed -->
-      </template>
+      </div><!-- end div.zerostate-price -->
+
+      <div class="price-content sealed" hidden$="[[editable]]">
+        <span class="price-value">{{currency}}{{_formatPrice(price)}}</span>
+      </div><!-- end div.price-content.sealed -->
 
       <!-- pricebox label -->
       <div class="price-label">
