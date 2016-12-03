@@ -35,6 +35,10 @@
         position: relative;
       }
 
+      :host .price-wrap.price-state-unavailable {
+        opacity: 0.3;
+      }
+
       :host div[hidden] {
         display: none;
       }
@@ -86,7 +90,7 @@
       }
     </style>
 
-    <div class="price-wrap">
+    <div class$="[[_priceClasses]]">
       <div class="zerostate-price" hidden$="[[!editable]]">
         <div class="price-content zerostate">
           <paper-input
@@ -125,13 +129,12 @@
       is: 'bloombox-price',
       properties: {
         /**
-         * Presents a new price after a user edits it in
-         * `editable` mode.
+         * Compute classes for this price box, according to item availability state.
          */
-        editedPriceValue: {
+        _priceClasses: {
           type: String,
           notify: true,
-          reflectToAttribute: true
+          computed: "_computePriceClasses(available)"
         },
 
         /**
@@ -141,6 +144,16 @@
           type: Number,
           notify: true,
           computed: "_computePriceValue(price, editedPriceValue)"
+        },
+
+        /**
+         * Presents a new price after a user edits it in
+         * `editable` mode.
+         */
+        editedPriceValue: {
+          type: String,
+          notify: true,
+          reflectToAttribute: true
         },
 
         /**
@@ -194,6 +207,15 @@
           notify: true,
           reflectToAttribute: true
         }
+      },
+
+      /**
+       * Compute the `_priceClasses` for this price box.
+       */
+      _computePriceClasses: function(available) {
+        return "price-wrap " + (available ?
+                               "price-state-available"
+                               : "price-state-unavailable");
       },
 
       /**
