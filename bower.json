@@ -22,10 +22,10 @@
   "homepage": "https://github.com/bloombox/bloombox-pricelist",
   "ignore": [],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.5.0",
+    "polymer": "Polymer/polymer#^1.7.0",
     "paper-input": "PolymerElements/paper-input#^1.1.11",
     "paper-checkbox": "PolymerElements/paper-checkbox#^1.2.0",
-    "bloombox-styles": "git@github.com:bloombox/bloombox-styles.git#master"
+    "bloombox-styles": "Bloombox/bloombox-styles"
   },
   "devDependencies": {
     "iron-component-page": "polymerelements/iron-component-page#^1.0.0",
@@ -33,7 +33,6 @@
     "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
     "iron-flex-layout": "polymerelements/iron-flex-layout#^1.0.0",
     "test-fixture": "polymerelements/test-fixture#^1.0.0",
-    "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   }
 }
