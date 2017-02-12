@@ -1,4 +1,6 @@
 target/
 bower_components/
 node_modules/
-release.tar.gz
+dist/
+components/
+*.tar.gz
