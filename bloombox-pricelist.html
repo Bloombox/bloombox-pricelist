@@ -89,9 +89,13 @@
             } else {
               pl = pp.label;
             }
+            var priceValue = (pp._priceValue || pp.price);
+            if (typeof priceValue === "string") {
+              priceValue = parseFloat(priceValue);
+            }
             data[pl] = {
               available: pp.available,
-              value: (pp._priceValue || pp.price)
+              value: priceValue
             };
           }
         }
