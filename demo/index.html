@@ -42,7 +42,7 @@
     <demo-snippet class="centered-demo">
       <template>
         <bloombox-pricelist
-          manifest='[{"label":"0.5g","available":true,"price":25},{"label":"1g","available":false,"price":55}]'>
+          manifest='[{"label":"0.5g","available":true,"value":25},{"label":"1g","available":false,"value":55}]'>
         </bloombox-pricelist>
       </template>
     </demo-snippet>
@@ -53,7 +53,18 @@
     <demo-snippet class="centered-demo">
       <template>
         <bloombox-pricelist
-          manifest='[{"label":"1g","available":true,"price":18},{"label":"3.5g","available":false,"price":55},{"label":"7g","available":false,"price":105},{"label":"14g","available":false,"price":195},{"label":"28g","available":true,"price":360}]'>
+          manifest='[{"label":"1g","available":true,"value":18},{"label":"3.5g","available":false,"value":55},{"label":"7g","available":false,"value":105},{"label":"14g","available":false,"value":195},{"label":"28g","available":true,"value":360}]'>
+        </bloombox-pricelist>
+      </template>
+    </demo-snippet>
+  </div>
+
+  <div class="vertical-section-container centered">
+    <h3>Flower pricing list example (as strings)</h3>
+    <demo-snippet class="centered-demo">
+      <template>
+        <bloombox-pricelist
+          manifest='[{"label":"1g","available":true,"value":"18"},{"label":"3.5g","available":false,"value":"55"},{"label":"7g","available":false,"value":"105"},{"label":"14g","available":false,"value":"195"},{"label":"28g","available":true,"value":"360"}]'>
         </bloombox-pricelist>
       </template>
     </demo-snippet>
