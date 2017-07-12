@@ -91,7 +91,16 @@
             }
             var priceValue = (pp._priceValue || pp.price || pp.value || pp.editedPriceValue);
             if (typeof priceValue === "string") {
-              priceValue = parseFloat(priceValue);
+              if (priceValue.length > 0) {
+                var priceValueAsFloat = parseFloat(priceValue);
+                if (!isNaN(priceValueAsFloat)) {
+                  priceValue = priceValueAsFloat;
+                } else {
+                  priceValue = 0.0;  // last resort
+                }
+              } else {
+                priceValue = 0.0;  // 0-length string
+              }
             }
             data[pl] = {
               available: pp.available,
