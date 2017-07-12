@@ -1,6 +1,6 @@
 {
   "name": "bloombox-pricelist",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "description": "Provides UI to display unit and weighted prices for cannabis products",
   "main": "index.html",
   "repository": {
