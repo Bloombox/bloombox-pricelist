@@ -25,7 +25,7 @@
     "polymer": "Polymer/polymer#^1.7.0",
     "paper-input": "PolymerElements/paper-input#^1.1.11",
     "paper-checkbox": "PolymerElements/paper-checkbox#^1.2.0",
-    "bloombox-styles": "Bloombox/bloombox-styles"
+    "bloombox-styles": "git@github.com:Bloombox/bloombox-styles.git"
   },
   "devDependencies": {
     "iron-component-page": "polymerelements/iron-component-page#^1.0.0",
